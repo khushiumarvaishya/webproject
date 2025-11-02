@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Student Portal</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#login" class="hover:text-gray-200">Login</a></li>
+                    <li><a href="#update" class="hover:text-gray-200">Updates</a></li>
+                    <li><a href="#query" class="hover:text-gray-200">Queries</a></li>
+                    <li><a href="#doubt" class="hover:text-gray-200">Doubts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login & Registration Section -->
+    <section id="login" class="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">Login / Registration</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Login Form -->
+            <form class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Login</h3>
+                <input type="email" placeholder="Email" class="w-full mb-3 p-2 border border-gray-300 rounded" />
+                <input type="password" placeholder="Password" class="w-full mb-3 p-2 border border-gray-300 rounded" />
+                <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Login</button>
+            </form>
+
+            <!-- Registration Form -->
+            <form class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Register</h3>
+                <input type="text" placeholder="Name" class="w-full mb-3 p-2 border border-gray-300 rounded" />
+                <input type="email" placeholder="Email" class="w-full mb-3 p-2 border border-gray-300 rounded" />
+                <input type="password" placeholder="Password" class="w-full mb-3 p-2 border border-gray-300 rounded" />
+                <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Register</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Update Section -->
+    <section id="update" class="max-w-5xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">Updates</h2>
+        <div class="space-y-4">
+            <div class="p-4 bg-gray-50 rounded shadow hover:bg-gray-100 transition">
+                <h3 class="font-semibold">Update 1</h3>
+                <p class="text-gray-700">Details about the first update.</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded shadow hover:bg-gray-100 transition">
+                <h3 class="font-semibold">Update 2</h3>
+                <p class="text-gray-700">Details about the second update.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Query Section -->
+    <section id="query" class="max-w-5xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">Queries</h2>
+        <form class="space-y-4">
+            <input type="text" placeholder="Your Name" class="w-full p-2 border border-gray-300 rounded" />
+            <input type="email" placeholder="Your Email" class="w-full p-2 border border-gray-300 rounded" />
+            <textarea placeholder="Type your query..." class="w-full p-2 border border-gray-300 rounded h-32"></textarea>
+            <button class="bg-yellow-500 text-white py-2 px-6 rounded hover:bg-yellow-600 transition">Submit Query</button>
+        </form>
+    </section>
+
+    <!-- Doubt Section -->
+    <section id="doubt" class="max-w-5xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-md mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">Doubts</h2>
+        <form class="space-y-4">
+            <input type="text" placeholder="Subject / Topic" class="w-full p-2 border border-gray-300 rounded" />
+            <textarea placeholder="Describe your doubt..." class="w-full p-2 border border-gray-300 rounded h-32"></textarea>
+            <button class="bg-red-500 text-white py-2 px-6 rounded hover:bg-red-600 transition">Submit Doubt</button>
+        </form>
+    </section>
+
+</body>
+</html>

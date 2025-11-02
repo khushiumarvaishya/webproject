@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2-Step Car Game</title>
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+    background: #222;
+    color: #fff;
+  }
+  #startScreen, #gameOverScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
+  #gameScreen {
+    display: none;
+    position: relative;
+    width: 300px;
+    height: 500px;
+    margin: 0 auto;
+    background: #555;
+    overflow: hidden;
+    border: 2px solid #fff;
+  }
+  .car {
+    position: absolute;
+    bottom: 20px;
+    left: 130px;
+    width: 40px;
+    height: 70px;
+    background: red;
+    border-radius: 5px;
+  }
+  .obstacle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: yellow;
+    top: -50px;
+  }
+</style>
+</head>
+<body>
+
+<div id="startScreen">
+  <h1>2-Step Car Game</h1>
+  <button onclick="startGame()">Start Game</button>
+</div>
+
+<div id="gameScreen">
+  <div class="car" id="car"></div>
+</div>
+
+<div id="gameOverScreen" style="display:none;">
+  <h1>Game Over!</h1>
+  <button onclick="restartGame()">Restart</button>
+</div>
+
+<script>
+const gameScreen = document.getElementById('gameScreen');
+const startScreen = document.getElementById('startScreen');
+const gameOverScreen = document.getElementById('gameOverScreen');
+const car = document.getElementById('car');
+
+let carPosition = 130;
+let obstacles = [];
+let gameInterval;
+let obstacleInterval;
+let isGameOver = false;
+
+function startGame() {
+  startScreen.style.display = 'none';
+  gameScreen.style.display = 'block';
+  isGameOver = false;
+  obstacles = [];
+  car.style.left = '130px';
+  
+  // Spawn obstacles
+  obstacleInterval = setInterval(createObstacle, 1500);
+  // Game loop
+  gameInterval = setInterval(gameLoop, 20);
+}
+
+// Move car with arrow keys
+document.addEventListener('keydown', (e) => {
+  if (isGameOver) return;
+  if (e.key === 'ArrowLeft' && carPosition > 0) carPosition -= 10;
+  if (e.key === 'ArrowRight' && carPosition < 260) carPosition += 10;
+  car.style.left = carPosition + 'px';
+});
+
+// Create obstacles
+function createObstacle() {
+  const obstacle = document.createElement('div');
+  obstacle.classList.add('obstacle');
+  obstacle.style.left = Math.floor(Math.random() * 7) * 40 + 'px';
+  gameScreen.appendChild(obstacle);
+  obstacles.push(obstacle);
+}
+
+// Game loop
+function gameLoop() {
+  for (let i = 0; i < obstacles.length; i++) {
+    const obs = obstacles[i];
+    const obsTop = parseInt(obs.style.top || '0');
+    if (obsTop > 500) {
+      obs.remove();
+      obstacles.splice(i,1);
+      i--;
+      continue;
+    }
+    obs.style.top = (obsTop + 5) + 'px';
+    
+    // Collision detection
+    const obsLeft = parseInt(obs.style.left);
+    const carTop = 430;
+    const carBottom = 500;
+    const carLeft = carPosition;
+    const carRight = carPosition + 40;
+    const obsBottom = obsTop + 40;
+    const obsRight = obsLeft + 40;
+    
+    if (!(carRight < obsLeft || carLeft > obsRight || carBottom < obsTop || carTop > obsBottom)) {
+      endGame();
+    }
+  }
+}
+
+// End game
+function endGame() {
+  isGameOver = true;
+  clearInterval(gameInterval);
+  clearInterval(obstacleInterval);
+  gameScreen.style.display = 'none';
+  gameOverScreen.style.display = 'flex';
+}
+
+function restartGame() {
+  gameOverScreen.style.display = 'none';
+  startScreen.style.display = 'flex';
+}
+</script>
+
+</body>
+</html>
